@@ -23,5 +23,6 @@ dependencies {
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: kafka_client_version
     compile group: 'org.testcontainers', name: 'kafka', version: testcontainers_version
     compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
-    compile 'org.json:json:20180130'
+    compile group: 'com.zaxxer', name: 'HikariCP', version: hikari_version
+    compile group: 'org.postgresql', name: 'postgresql', version: postgres_driver_version
 }

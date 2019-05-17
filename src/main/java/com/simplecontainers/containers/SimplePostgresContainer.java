@@ -1,10 +1,14 @@
 package com.simplecontainers.containers;
 
 import com.simplecontainers.Container;
+import com.simplecontainers.utils.JdbcUtils;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>> extends PostgreSQLContainer<SELF> implements Container {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>> extends PostgreSQLContainer<SELF> implements Container, JdbcUtils {
 
     private Network sharedNetwork = null;
 
@@ -46,5 +50,9 @@ public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>>
     @Override
     public Integer getInternalPort() {
         return super.getMappedPort(POSTGRESQL_PORT);
+    }
+
+    public ResultSet executeQuery(String sql) throws SQLException {
+        return executeQuery(this, sql);
     }
 }
