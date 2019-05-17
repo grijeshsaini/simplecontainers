@@ -8,7 +8,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>> extends PostgreSQLContainer<SELF> implements Container, JdbcUtils {
+public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>>
+        extends PostgreSQLContainer<SELF> implements Container, JdbcUtils {
 
     private Network sharedNetwork = null;
 
