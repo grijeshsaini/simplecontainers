@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.simplecontainers'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'junit', name: 'junit', version: junit_version
+    compile group: 'org.testcontainers', name: 'testcontainers', version: testcontainers_version
+    compile group: 'org.testcontainers', name: 'postgresql', version: testcontainers_version
+    compile group:'org.apache.logging.log4j', name:'log4j-api', version:log4j_version
+    compile group:'org.apache.logging.log4j', name:'log4j-core', version:log4j_version
+    compile group:'org.apache.logging.log4j', name:'log4j-slf4j-impl', version:log4j_version
+    compile group: 'org.apache.activemq', name: 'activemq-client', version: activemq_version
+    compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: cassandra_version
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: kafka_client_version
+    compile group: 'org.testcontainers', name: 'kafka', version: testcontainers_version
+    compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    compile 'org.json:json:20180130'
+}
