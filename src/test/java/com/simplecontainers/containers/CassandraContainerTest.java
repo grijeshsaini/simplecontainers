@@ -20,6 +20,8 @@ public class CassandraContainerTest {
     public void shouldAbleToReturnPropertiesOfContainer() {
         Assert.assertNotNull(cassandraContainer.getExternalHost());
         Assert.assertNotNull(cassandraContainer.getExternalPort());
+        Assert.assertNotNull(cassandraContainer.getInternalHost());
+        Assert.assertNotNull(cassandraContainer.getInternalPort());
         Assert.assertNotNull(cassandraContainer.url());
     }
 

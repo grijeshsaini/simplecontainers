@@ -39,7 +39,7 @@ public class CassandraContainer extends AbstractSimpleContainer {
     public List<ResultSet> executeCqlStatements(List<String> cqlStatements) {
         Cluster cluster = Cluster.builder()
                 .addContactPoint(getExternalHost())
-                .withPort(this.getExternalPort())
+                .withPort(getExternalPort())
                 .build();
 
         Session session = cluster.connect();

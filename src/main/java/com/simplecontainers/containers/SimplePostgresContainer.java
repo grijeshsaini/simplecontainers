@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>>
         extends PostgreSQLContainer<SELF> implements Container, JdbcUtils {
 
-    private Network sharedNetwork = null;
+    private Network sharedNetwork;
 
     public SimplePostgresContainer() {
         super();
@@ -28,6 +28,7 @@ public class SimplePostgresContainer<SELF extends SimplePostgresContainer<SELF>>
 
     @Override
     public void withSharedNetwork(Network network) {
+        this.sharedNetwork = network;
         super.withNetwork(network);
     }
 

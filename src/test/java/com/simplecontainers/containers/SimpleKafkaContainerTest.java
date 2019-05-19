@@ -2,6 +2,7 @@ package com.simplecontainers.containers;
 
 import com.google.common.collect.ImmutableMap;
 import com.simplecontainers.rules.SimpleContainersSpinnerRule;
+import com.simplecontainers.rules.SimpleOrderedContainersSpinnerRule;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -10,11 +11,14 @@ import org.junit.Test;
 public class SimpleKafkaContainerTest {
     private static final SimpleKafkaContainer kafkaContainer = new SimpleKafkaContainer();
 
+    private static final ActiveMqContainer activeMqContainer = new ActiveMqContainer();
+
     @ClassRule
-    public static SimpleContainersSpinnerRule simpleContainerSpinner = new SimpleContainersSpinnerRule(kafkaContainer);
+    public static SimpleOrderedContainersSpinnerRule simpleContainerSpinner = new SimpleOrderedContainersSpinnerRule(kafkaContainer, activeMqContainer);
 
     @Test
     public void shouldAbleToSendAndReadMessageFromTopic() {
+        kafkaContainer.getInternalHost();
         kafkaContainer.sendMessageToTopic("testTopic", "200", "KEY");
         ConsumerRecord<String, String> message = kafkaContainer.getMessageFromTopic("testTopic");
 

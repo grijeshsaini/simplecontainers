@@ -10,7 +10,7 @@ import org.testcontainers.containers.Network;
 public abstract class AbstractSimpleContainer implements Container {
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass().getName());
     private GenericContainer underlyingContainer;
-    private Network sharedNetwork = null;
+    private Network sharedNetwork;
 
     protected abstract GenericContainer getUnderlyingContainer();
 
@@ -41,24 +41,25 @@ public abstract class AbstractSimpleContainer implements Container {
 
     @Override
     public String getExternalHost() {
-        if (sharedNetwork != null) return underlyingContainer.getNetworkAliases().get(0).toString();
-        else return getInternalHost();
+        return underlyingContainer.getContainerIpAddress();
+
     }
 
     @Override
     public Integer getExternalPort() {
-        if (sharedNetwork != null) return getExposedPort();
-        else return getInternalPort();
+        return underlyingContainer.getMappedPort(getExposedPort());
     }
 
     @Override
     public String getInternalHost() {
-        return underlyingContainer.getContainerIpAddress();
+        if (sharedNetwork != null) return underlyingContainer.getNetworkAliases().get(0).toString();
+        else return underlyingContainer.getContainerIpAddress();
     }
 
     @Override
     public Integer getInternalPort() {
-        return underlyingContainer.getMappedPort(getExposedPort());
+        if (sharedNetwork != null) return getExposedPort();
+        else return underlyingContainer.getMappedPort(getExposedPort());
     }
 
     @Override
