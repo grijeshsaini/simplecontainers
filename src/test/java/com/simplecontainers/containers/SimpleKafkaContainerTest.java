@@ -1,7 +1,7 @@
 package com.simplecontainers.containers;
 
 import com.google.common.collect.ImmutableMap;
-import com.simplecontainers.SimpleContainersSpinnerRule;
+import com.simplecontainers.rules.SimpleContainersSpinnerRule;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.Assert;
 import org.junit.ClassRule;

@@ -1,5 +1,6 @@
-package com.simplecontainers;
+package com.simplecontainers.rules;
 
+import com.simplecontainers.Container;
 import org.junit.rules.ExternalResource;
 
 import java.util.Arrays;

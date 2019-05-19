@@ -1,6 +1,7 @@
-package com.simplecontainers;
+package com.simplecontainers.containers;
 
 import com.google.common.base.Preconditions;
+import com.simplecontainers.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;

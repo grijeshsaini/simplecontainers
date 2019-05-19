@@ -1,6 +1,6 @@
 package com.simplecontainers.containers;
 
-import com.simplecontainers.SimpleContainersSpinnerRule;
+import com.simplecontainers.rules.SimpleContainersSpinnerRule;
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Test;

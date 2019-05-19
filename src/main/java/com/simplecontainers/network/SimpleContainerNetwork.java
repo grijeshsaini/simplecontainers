@@ -1,4 +1,4 @@
-package com.simplecontainers;
+package com.simplecontainers.network;
 
 import org.testcontainers.containers.Network;
 

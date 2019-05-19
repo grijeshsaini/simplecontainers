@@ -1,6 +1,5 @@
 package com.simplecontainers.containers;
 
-import com.simplecontainers.AbstractSimpleContainer;
 import org.testcontainers.containers.GenericContainer;
 
 public class SimpleImageContainer extends AbstractSimpleContainer {

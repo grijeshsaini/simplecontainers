@@ -3,7 +3,6 @@ package com.simplecontainers.containers;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Session;
-import com.simplecontainers.AbstractSimpleContainer;
 import org.testcontainers.containers.GenericContainer;
 
 import java.time.Duration;

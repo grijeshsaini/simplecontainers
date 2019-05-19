@@ -1,5 +1,7 @@
-package com.simplecontainers;
+package com.simplecontainers.rules;
 
+import com.simplecontainers.Container;
+import com.simplecontainers.network.SimpleContainerNetwork;
 import org.junit.rules.ExternalResource;
 import org.testcontainers.containers.Network;
 
