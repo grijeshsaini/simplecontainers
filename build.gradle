@@ -28,6 +28,7 @@ dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
     compile group: 'com.zaxxer', name: 'HikariCP', version: hikari_version
     compile group: 'org.postgresql', name: 'postgresql', version: postgres_driver_version
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: rest_assured_version
 }
 
 tasks.withType(Test) {

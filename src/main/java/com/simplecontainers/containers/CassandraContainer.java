@@ -20,7 +20,7 @@ public class CassandraContainer extends AbstractSimpleContainer {
     }
 
     public CassandraContainer() {
-        this.cassandraImage = "cassandra:3.11.3";
+        this("cassandra:3.11.3");
     }
 
     @Override

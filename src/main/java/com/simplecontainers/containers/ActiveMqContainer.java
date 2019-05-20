@@ -18,7 +18,7 @@ public class ActiveMqContainer extends AbstractSimpleContainer {
     private final String activeMqImage;
 
     public ActiveMqContainer() {
-        this.activeMqImage = "rmohr/activemq:5.15.6";
+        this("rmohr/activemq:5.15.6");
     }
 
     public ActiveMqContainer(String activeMqImage) {
