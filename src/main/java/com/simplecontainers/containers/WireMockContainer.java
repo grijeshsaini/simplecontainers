@@ -7,7 +7,6 @@ import org.testcontainers.containers.GenericContainer;
 
 public class WireMockContainer extends AbstractSimpleContainer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WireMockContainer.class);
     private static final int WIREMOCK_PORT = 8080;
     private static final String DEFAULT_IMAGE = "rodolpheche/wiremock:2.23.2";
     private final String wireMockImage;

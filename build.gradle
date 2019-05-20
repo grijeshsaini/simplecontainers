@@ -29,6 +29,7 @@ dependencies {
     compile group: 'com.zaxxer', name: 'HikariCP', version: hikari_version
     compile group: 'org.postgresql', name: 'postgresql', version: postgres_driver_version
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: rest_assured_version
+    compile group: 'redis.clients', name: 'jedis', version: redis_client_version
 }
 
 tasks.withType(Test) {
