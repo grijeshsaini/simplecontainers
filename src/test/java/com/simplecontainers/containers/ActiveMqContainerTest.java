@@ -1,12 +1,12 @@
 package com.simplecontainers.containers;
 
-import com.google.common.collect.ImmutableMap;
 import com.simplecontainers.rules.SimpleContainersSpinnerRule;
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Test;
 
 import javax.jms.JMSException;
+import java.util.Map;
 
 public class ActiveMqContainerTest {
     private static final ActiveMqContainer activeMqContainer = new ActiveMqContainer("rmohr/activemq:5.12.0");
@@ -27,7 +27,7 @@ public class ActiveMqContainerTest {
 
     @Test
     public void shouldAbleToReadMessagePropertyFromQueue() throws JMSException {
-        activeMqContainer.sendMessageToQueue("TEST_MESSAGE", "testQueue", ImmutableMap.of("TEST_KEY", "TEST_VALUE"));
+        activeMqContainer.sendMessageToQueue("TEST_MESSAGE", "testQueue", Map.of("TEST_KEY", "TEST_VALUE"));
 
         Assert.assertEquals("TEST_VALUE", activeMqContainer.getMessagePropertyFromQueue("testQueue", "TEST_KEY"));
     }

@@ -1,12 +1,12 @@
 package com.simplecontainers.containers;
 
-import com.google.common.collect.ImmutableMap;
-import com.simplecontainers.rules.SimpleContainersSpinnerRule;
 import com.simplecontainers.rules.SimpleOrderedContainersSpinnerRule;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class SimpleKafkaContainerTest {
     private static final SimpleKafkaContainer kafkaContainer = new SimpleKafkaContainer();
@@ -27,7 +27,7 @@ public class SimpleKafkaContainerTest {
 
     @Test
     public void shouldAbleToSendMessageWithHeaderAndReadHeadersFromTopic() {
-        kafkaContainer.sendMessageToTopic("testTopic", "MESSAGE", "KEY", ImmutableMap.of("HEADER_KEY", "HEADER_VALUE"));
+        kafkaContainer.sendMessageToTopic("testTopic", "MESSAGE", "KEY", Map.of("HEADER_KEY", "HEADER_VALUE"));
 
         ConsumerRecord<String, String> message = kafkaContainer.getMessageFromTopic("testTopic");
 

@@ -1,10 +1,10 @@
 package com.simplecontainers.containers;
 
-import com.datastax.driver.core.Cluster;
-import com.datastax.driver.core.ResultSet;
-import com.datastax.driver.core.Session;
+import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.ResultSet;
 import org.testcontainers.containers.GenericContainer;
 
+import java.net.InetSocketAddress;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +25,7 @@ public class CassandraContainer extends AbstractSimpleContainer {
 
     @Override
     public GenericContainer getUnderlyingContainer() {
-        return new GenericContainer(cassandraImage)
+        return new GenericContainer<>(cassandraImage)
                 .withExposedPorts(CASSANDRA_PORT)
                 .withStartupAttempts(3)
                 .withStartupTimeout(Duration.ofSeconds(360L));
@@ -37,12 +37,11 @@ public class CassandraContainer extends AbstractSimpleContainer {
     }
 
     public List<ResultSet> executeCqlStatements(List<String> cqlStatements) {
-        Cluster cluster = Cluster.builder()
-                .addContactPoint(getExternalHost())
-                .withPort(getExternalPort())
+        CqlSession session = CqlSession.builder()
+                .addContactPoint(new InetSocketAddress(getExternalHost(), getExternalPort()))
+                .withLocalDatacenter("datacenter1")
                 .build();
 
-        Session session = cluster.connect();
         List<ResultSet> resultSets = cqlStatements.stream().map(session::execute).collect(Collectors.toList());
         Collections.reverse(resultSets);
         return resultSets;

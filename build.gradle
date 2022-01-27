@@ -1,6 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 plugins {
     id 'java'
 }
@@ -8,52 +5,29 @@ plugins {
 group 'com.simplecontainers'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile group: 'junit', name: 'junit', version: junit_version
-    compile group: 'org.testcontainers', name: 'testcontainers', version: testcontainers_version
-    compile group: 'org.testcontainers', name: 'postgresql', version: testcontainers_version
-    compile group:'org.apache.logging.log4j', name:'log4j-api', version:log4j_version
-    compile group:'org.apache.logging.log4j', name:'log4j-core', version:log4j_version
-    compile group:'org.apache.logging.log4j', name:'log4j-slf4j-impl', version:log4j_version
-    compile group: 'org.apache.activemq', name: 'activemq-client', version: activemq_version
-    compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: cassandra_version
-    compile group: 'org.apache.kafka', name: 'kafka-clients', version: kafka_client_version
-    compile group: 'org.testcontainers', name: 'kafka', version: testcontainers_version
-    compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
-    compile group: 'com.zaxxer', name: 'HikariCP', version: hikari_version
-    compile group: 'org.postgresql', name: 'postgresql', version: postgres_driver_version
-    testCompile group: 'io.rest-assured', name: 'rest-assured', version: rest_assured_version
-    compile group: 'redis.clients', name: 'jedis', version: redis_client_version
+    implementation group: 'org.testcontainers', name: 'testcontainers', version: testcontainers_version
+    implementation group: 'org.testcontainers', name: 'postgresql', version: testcontainers_version
+    implementation group: 'org.apache.activemq', name: 'activemq-client', version: activemq_version
+    implementation group: 'com.datastax.oss', name: 'java-driver-core', version: cassandra_version
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: kafka_client_version
+    implementation group: 'org.testcontainers', name: 'kafka', version: testcontainers_version
+    implementation group: 'org.postgresql', name: 'postgresql', version: postgres_driver_version
+    implementation group: 'redis.clients', name: 'jedis', version: redis_client_version
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: hikari_version
+
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: rest_assured_version
+    testImplementation group: 'junit', name: 'junit', version: junit_version
 }
 
 tasks.withType(Test) {
     testLogging {
-        // set options for log level LIFECYCLE
-        events TestLogEvent.FAILED,
-                TestLogEvent.PASSED,
-                TestLogEvent.SKIPPED,
-                TestLogEvent.STANDARD_OUT
-        exceptionFormat TestExceptionFormat.FULL
-        showExceptions true
-        showCauses true
-        showStackTraces true
-
-        info.events = events
-        info.exceptionFormat = exceptionFormat
-
-        afterSuite { desc, result ->
-            if (!desc.parent) { // will match the outermost suite
-                def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
-                def startItem = '|  ', endItem = '  |'
-                def repeatLength = startItem.length() + output.length() + endItem.length()
-                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
-            }
-        }
+        events "passed", "started", "skipped", "failed"
     }
 }

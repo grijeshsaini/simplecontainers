@@ -1,6 +1,6 @@
 package com.simplecontainers.containers;
 
-import com.datastax.driver.core.ResultSet;
+import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.simplecontainers.rules.SimpleContainersSpinnerRule;
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -29,6 +29,6 @@ public class CassandraContainerTest {
     public void shouldAbleToExecuteCQLStatements() {
         List<ResultSet> resultSets = cassandraContainer.executeCqlStatements(Collections.singletonList("SELECT release_version FROM system.local where key = 'local';"));
 
-        Assert.assertTrue(resultSets.get(0).one().toString().contains("3.11.3"));
+        Assert.assertEquals(resultSets.get(0).one().getString("release_version"), "3.11.3");
     }
 }

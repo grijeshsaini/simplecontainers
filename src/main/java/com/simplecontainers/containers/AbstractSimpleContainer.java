@@ -1,6 +1,5 @@
 package com.simplecontainers.containers;
 
-import com.google.common.base.Preconditions;
 import com.simplecontainers.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ public abstract class AbstractSimpleContainer implements Container {
     @Override
     public void start() {
         underlyingContainer = getUnderlyingContainer();
-        Preconditions.checkNotNull(underlyingContainer, "Please initialise underlying container");
         LOGGER.info("Starting underlying container {}", underlyingContainer.getDockerImageName());
         if (sharedNetwork != null) underlyingContainer.withNetwork(sharedNetwork);
         underlyingContainer.start();
@@ -28,7 +26,6 @@ public abstract class AbstractSimpleContainer implements Container {
 
     @Override
     public void stop() {
-        Preconditions.checkNotNull(underlyingContainer, "Container doesn't exist");
         LOGGER.info("Stopping underlying container {}", underlyingContainer.getDockerImageName());
         underlyingContainer.stop();
         LOGGER.info("Stopped container {}", underlyingContainer.getDockerImageName());
